@@ -15,6 +15,6 @@ public class Frame extends JFrame{
         setSize(500, 500);
         //Rendre la fenetre visible
         setVisible(true);
-        
+        add(new Pannel());
     }
 }
