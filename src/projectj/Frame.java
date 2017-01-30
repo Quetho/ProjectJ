@@ -1,6 +1,8 @@
 package projectj;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Frame extends JFrame{
 
@@ -15,6 +17,7 @@ public class Frame extends JFrame{
         setSize(500, 500);
         //Rendre la fenetre visible
         setVisible(true);
+        
         add(new Pannel());
     }
 }
