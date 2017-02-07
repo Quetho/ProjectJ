@@ -1,16 +1,20 @@
+
 package projectj;
 
-import javax.swing.SwingUtilities;
+import javax.swing.JFrame;
 
 public class ProjectJ {
+
     public static void main(String[] args) {
-        //opti Swing
-        SwingUtilities.invokeLater(new Runnable(){
-            public void run(){
-                //Appel de la classe Frame avec en arg
-                //le titre de la fenetre crée
-                new Frame("Test ONE");
-            }
-        });  
+        JFrame window = new JFrame();
+        Game game = new Game();
+        window.setBounds(200,100,500,500);
+        window.setTitle("Bricker");
+        window.setResizable(false);
+        window.setVisible(true);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.add(game);
+        
     }
+    
 }
