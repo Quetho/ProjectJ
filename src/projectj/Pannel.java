@@ -1,17 +1,29 @@
 package projectj;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 public class Pannel extends JPanel{
     
     private static final long serialVersionUID = 1L;
-    
+    public static int count = 0;
+
     public Pannel(){
         //initialiser les composants
         //boutton avec arg : texte du boutton
@@ -21,6 +33,7 @@ public class Pannel extends JPanel{
         JLabel pass = new JLabel("Password");
         //zone de text/password avec arg : taille de la zone de texte
         JTextField textfield = new JTextField(10);
+        JTextArea textarea = new JTextArea(2,8);
         JPasswordField passwordfield = new JPasswordField(10);
         //menu Select. peut prendre en argument un tableau
         JComboBox<String> menuSelect = new JComboBox<String>();
@@ -28,13 +41,64 @@ public class Pannel extends JPanel{
         menuSelect.addItem("C'est");
         menuSelect.addItem("Cool");
 
+        
+        //evenement
+        button.addActionListener(new ActionListener() {
+            //a chaque click sur le boutton, rajoute une ligne dans le text area
+            public void actionPerformed(ActionEvent e) {
+                count++;
+                textarea.append("olala ca marche"+count+"fois\n");
+                
+            }      
+        });
+        //si on click droit sur nickname, affiche du text dans la console
+        nick.addMouseListener(new MouseListener(){
+            
+            public void mouseClicked(MouseEvent e) {
+                if(SwingUtilities.isRightMouseButton(e)){
+                    System.out.println("rightclick on nick mgl");
+                }
+            }
+            public void mousePressed(MouseEvent e) {
+            }
+            public void mouseReleased(MouseEvent e) { 
+            }
+            public void mouseEntered(MouseEvent e) {   
+            }
+            public void mouseExited(MouseEvent e) {             
+            }
+            
+        });
+        //les lettres tappées dans le nicknae sont envoyée à la console
+        textfield.addKeyListener(new KeyListener() {
+            public void keyTyped(KeyEvent e) {
+                System.out.println(e.getKeyChar());
+            }
+            //affiche le keycode dans la console si curseur actif dans le nickname
+            public void keyPressed(KeyEvent e) {
+                System.out.println(e.getKeyCode());
+
+            }
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+        
+        menuSelect.addItemListener(new ItemListener(){
+            public void itemStateChanged(ItemEvent e) {
+                System.out.println("item selectionné changé");
+            }
+            
+        });
         //afficher les composants
+        
         add(button);
         add(nick);
         add(textfield);
         add(pass);
         add(passwordfield);
         add(menuSelect);
+        //ajout zone de texte avec barre de defilement
+        add(new JScrollPane(textarea));
     }
     
     
